@@ -87,7 +87,7 @@ Edit brand.json once. npm run docs produces collection access reviews and docume
 
 ## Verification and scope
 
-npm test covers all 26 commands, migration and seed idempotency, audience and freshness filtering, changed-source approval withdrawal, malformed imports, rollback, mapping, duplicate ids, preserved source columns, audit, export and escaped HTML. CI is configured for Windows and Linux with Node 20 and 22 and PostgreSQL 17. Local execution results and remote CI results are distinct evidence.
+npm test covers all 26 commands, migration and seed idempotency, audience and freshness filtering, changed-source approval withdrawal, malformed imports, rollback, mapping, duplicate ids, preserved source columns, audit, export and escaped HTML. The shared manual CI workflow is configured for Windows and Linux with Node 20 and 22 and PostgreSQL 17. Local execution results and remote CI results are distinct evidence.
 
 The free base searches supplied text. Crawlers, OCR, PDF text extraction, live connectors, semantic retrieval, SSO and staff screens are separate implementation work. It does not clone the whole SearchBlox platform. Enterprise DNA builds the agreed connections and access controls for your version. [Why no front end](docs/why-no-front-end.md) · [Operations](docs/operations.md).
 

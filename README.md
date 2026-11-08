@@ -6,7 +6,7 @@ Find the approved source. See who owns it, when it was reviewed and what needs a
 |---|---|---|
 | Free, MIT. Install and try fictional records. | Your source mapping, access rules, connections and reports. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=searchblox&utm_source=github&utm_medium=readme) · [Instead of SearchBlox](https://enterprisedna.co/omni/instead-of/searchblox)
+[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=searchblox&utm_source=github&utm_medium=readme) · [Instead of SearchBlox](https://enterprisedna.co/omni/instead-of/searchblox?utm_source=github&utm_medium=readme&utm_campaign=searchblox)
 
 ## Start here
 

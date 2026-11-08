@@ -29,7 +29,7 @@ The fictional demo has seven documents across Operations, Board and Legacy colle
 
 26 CLI commands and 28 slash-command recipes. Every domain command accepts --json. Record changes require --actor and support --dry-run. Exact codes, case-insensitive names and partial ids work. Ambiguous names list candidates and exit 1.
 
-Full-text keyword search ranks title matches above body matches and stems English words. Only approved content with current owner, purpose, document review, retention review and collection access review is searchable. Results include source URL, review date, excerpt and SHA256 fingerprint. The CLI returns at most 20 results per query. No answer is invented when nothing matches.
+Full-text keyword search ranks title matches above body matches and stems English words. Only approved content with current owner, purpose, document review, retention review and collection access review is searchable. The human result lists the source URL and review date. JSON results also include the excerpt and SHA256 fingerprint. The CLI returns at most 20 results per query. No answer is invented when nothing matches.
 
 This is a trusted administrator tool. Audience filtering is not user authentication. Anyone with the database owner account or shell can read all collections. Shared access requires an authenticated service with permissions enforced there. Never expose this CLI, its raw database or generated administrator reports directly to staff.
 

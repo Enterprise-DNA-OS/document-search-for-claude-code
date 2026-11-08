@@ -1,5 +1,3 @@
-# Slash commands
+# Command recipes
 
-One file per recurring job. Each command tells Claude Code exactly which CLI command to run and how to present the result, so the operator never re-explains the job.
-
-Add a command every time the same ask comes twice. Frontmatter needs a `description:` line. The body is the brief.
+One recipe per recurring job. Read ../../CLAUDE.md (the repository root) first. Scripts are the source of results. /customise and /new-view extend the same system. No parallel agent-specific command library.

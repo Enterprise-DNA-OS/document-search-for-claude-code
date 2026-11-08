@@ -1,11 +1,41 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "collection-review",
+    "title": "Collection access and content review",
+    "for_each": "select id,code from collections order by code",
+    "file": "code",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Owner and access",
+        "sql": "select code,name,owner,audience,purpose,access_review_on from collections where id=$1",
+        "layout": "record"
+      },
+      {
+        "title": "Document position",
+        "sql": "select d.external_id,d.title,d.owner,d.status,d.review_on,d.retention_review_on,r.searchable from documents d join document_register r on r.id=d.id where d.collection_id=$1 order by d.external_id"
+      }
+    ]
+  },
+  {
+    "name": "retention-review",
+    "title": "Document retention review worksheet",
+    "for_each": "select id,external_id from documents where status<>'archived' order by external_id",
+    "file": "external_id",
+    "sections": [
+      {
+        "title": "Purpose and review dates",
+        "sql": "select external_id,title,owner,personal_data,purpose,review_on,retention_review_on,source_url,content_hash from documents where id=$1",
+        "layout": "record"
+      },
+      {
+        "title": "Review evidence",
+        "sql": "select actor,note,content_hash,review_on,retention_review_on,created_at from reviews where document_id=$1 order by created_at"
+      },
+      {
+        "title": "Follow-up",
+        "sql": "select code,title,owner,due_on,status,resolution from actions where document_id=$1 order by due_on",
+        "note": "A human decides retention and any legal hold. This worksheet does not authorise destruction."
+      }
     ]
   }
 ]

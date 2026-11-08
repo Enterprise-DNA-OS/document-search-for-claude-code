@@ -1,0 +1,42 @@
+[
+  [
+    "Which current source explains supplier onboarding?",
+    "search --query=supplier --group=staff"
+  ],
+  [
+    "Which content is excluded from staff search?",
+    "documents"
+  ],
+  [
+    "Which documents need an owner review today?",
+    "review-due"
+  ],
+  [
+    "Which personal records need a retention-purpose review?",
+    "retention-due"
+  ],
+  [
+    "Which collection has no current access review?",
+    "compliance"
+  ],
+  [
+    "Where did the same content appear twice?",
+    "duplicates"
+  ],
+  [
+    "Which questions were logged without an answer?",
+    "gaps"
+  ],
+  [
+    "Who has the most content held back?",
+    "owner-load"
+  ],
+  [
+    "Which follow-up is overdue?",
+    "attention"
+  ],
+  [
+    "What evidence supported a document approval?",
+    "document IMPORT-001"
+  ]
+]

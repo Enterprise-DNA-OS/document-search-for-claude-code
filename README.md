@@ -1,115 +1,100 @@
-<h1 align="center">Document Search for Claude Code</h1>
+# Document Search for Claude Code
 
-<p align="center">
-  <strong>The open-source enterprise document search system that is just a database and Claude Code.</strong>
-</p>
+Find the approved source. See who owns it, when it was reviewed and what needs attention before staff rely on it.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free, MIT. Install and try fictional records. | Your source mapping, access rules, connections and reports. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your SearchBlox data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=searchblox">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/searchblox?utm_source=github&utm_medium=readme&utm_campaign=searchblox">How it works</a></td>
-  </tr>
-</table>
+[Get your version built](https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=searchblox&utm_source=github&utm_medium=readme) · [Instead of SearchBlox](https://enterprisedna.co/omni/instead-of/searchblox)
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-searchblox">Instead of SearchBlox</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
+## Start here
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Document Search for Claude Code does the job you pay SearchBlox for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the SearchBlox dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays SearchBlox per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=searchblox).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
-
-## Quick start
-
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or later:
 
 ```bash
-git clone https://github.com/Enterprise-DNA-OS/document-search-for-claude-code.git
-cd document-search-for-claude-code
 npm install
 npm run demo
+npm run search -- search --query=supplier --group=staff
+npm run search -- weekly-review
+npm run docs
+npm run view
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+Open the folder in Claude Code, Codex, OpenCode or Cursor. AGENTS.md and CLAUDE.md use one command library. The database is PostgreSQL or embedded PGlite. There is no paid model call in this software. Your chosen agent has its own costs.
 
-### Use it with your own Postgres or Supabase
+The fictional demo has seven documents across Operations, Board and Legacy collections. One duplicate, overdue reviews, an overdue action and two unanswered travel searches make the Monday review useful. Dates are relative to the seed day. Seeding twice preserves existing records.
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+## What works
 
-## The commands
+26 CLI commands and 28 slash-command recipes. Every domain command accepts --json. Record changes require --actor and support --dry-run. Exact codes, case-insensitive names and partial ids work. Ambiguous names list candidates and exit 1.
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+Full-text keyword search ranks title matches above body matches and stems English words. Only approved content with current owner, purpose, document review, retention review and collection access review is searchable. Results include source URL, review date, excerpt and SHA256 fingerprint. The CLI returns at most 20 results per query. No answer is invented when nothing matches.
 
-| Command | What it does |
-|---|---|
-| `/...` | ... |
+This is a trusted administrator tool. Audience filtering is not user authentication. Anyone with the database owner account or shell can read all collections. Shared access requires an authenticated service with permissions enforced there. Never expose this CLI, its raw database or generated administrator reports directly to staff.
 
-## Instead of SearchBlox
+## Weekly work
 
-<!-- TODO(author): how to bring data across from SearchBlox; link docs/replace-searchblox.md -->
+/search finds evidence. /review-due and /retention-due prepare review lists. /coverage shows why a collection is held back. /gaps finds explicitly logged unanswered searches. /attention and /weekly-review keep follow-up visible. /review-document records the human check and its fingerprint. /draft-search renders a citation pack. /draft-review renders the weekly review. Nothing sends.
 
-## Architecture
+## Ten questions you can answer today
 
+These are demonstrated questions for your own system, not unsupported claims about missing SearchBlox features.
+
+1. Which current source explains supplier onboarding? Run `search --query=supplier --group=staff`.
+2. Which content is excluded from staff search? Run `documents`.
+3. Which documents need an owner review today? Run `review-due`.
+4. Which personal records need a retention-purpose review? Run `retention-due`.
+5. Which collection has no current access review? Run `compliance`.
+6. Where did the same content appear twice? Run `duplicates`.
+7. Which questions were logged without an answer? Run `gaps`.
+8. Who has the most content held back? Run `owner-load`.
+9. Which follow-up is overdue? Run `attention`.
+10. What evidence supported a document approval? Run `document IMPORT-001`.
+
+The last example uses the supplied import fixture after approval. Every other question runs on the seeded demo.
+
+## Switch from a SearchBlox CSV collection
+
+Use the original CSV file that feeds that collection, with its configured unique field. Configuration XML contains settings, not the document corpus. A full index export is not claimed.
+
+```bash
+npm run search -- import searchblox --collection=DEMO-OPS --file=fixtures/searchblox.csv --map=fixtures/searchblox-map.json --actor="Your name" --dry-run
 ```
-document-search-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
 
-## Built for coding agents
+Inspect the preview, repeat without --dry-run, then review the imported documents. Missing privacy classification defaults to personal data. Source columns are preserved. Imports are transactional and idempotent; changed content, source metadata or ownership withdraws approval. Duplicate ids in a file fail the whole batch. [Detailed switching guide](docs/replace-searchblox.md).
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Documents and dashboards
 
-## Contributing
+Edit brand.json once. npm run docs produces collection access reviews and document retention worksheets. npm run view produces the week, review queue and search-gap dashboards. /new-view adds another read-only report. These files contain private administrator information and are not staff portals.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+/compliance links findings to [privacy rules and local controls](docs/compliance.md). The check prompts evidence review. It cannot certify lawful processing, identify all personal information or decide a retention period for your business.
 
-## Want it installed and run for you?
+## Your first hour: ten things to ask for
 
-Enterprise DNA installs Document Search for Claude Code for your business, migrates your SearchBlox data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+1. Put our name and colours on the reports.
+2. Find the approved supplier guide.
+3. Explain why the old policy is excluded.
+4. Show the separate board audience.
+5. List the content with overdue reviews.
+6. Preview our source CSV without saving it.
+7. Record who checked one imported document.
+8. Draft a source citation pack.
+9. Add a department view.
+10. Add a business-specific retention reason with a tested migration.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=searchblox)
-- Read more: [enterprisedna.co/omni/instead-of/searchblox](https://enterprisedna.co/omni/instead-of/searchblox?utm_source=github&utm_medium=readme&utm_campaign=searchblox)
+/customise applies a tested migration, updates the importer, commands and documents, then verifies the change.
 
-## License
+## Verification and scope
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+npm test covers all 26 commands, migration and seed idempotency, audience and freshness filtering, changed-source approval withdrawal, malformed imports, rollback, mapping, duplicate ids, preserved source columns, audit, export and escaped HTML. CI is configured for Windows and Linux with Node 20 and 22 and PostgreSQL 17. Local execution results and remote CI results are distinct evidence.
+
+The free base searches supplied text. Crawlers, OCR, PDF text extraction, live connectors, semantic retrieval, SSO and staff screens are separate implementation work. It does not clone the whole SearchBlox platform. Enterprise DNA builds the agreed connections and access controls for your version. [Why no front end](docs/why-no-front-end.md) · [Operations](docs/operations.md).
+
+## Price context
+
+SearchBlox lists its self-managed single-server licence at $25,000 per year and its three-server cluster at $75,000. Those are vendor list prices, not verified customer invoices. [Vendor pricing](https://www.searchblox.com/pricing), checked 8 November 2026. [Selection evidence](docs/research.md).
+
+Enterprise DNA brings across your authorised source records, builds around your business and operates your version through Omni by Enterprise DNA. One setup fee, then a retainer. [Book 30 minutes with Sam](https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=searchblox&utm_medium=readme).
+
+MIT. Not affiliated with SearchBlox or Anthropic. Hosting, agent usage and implementation have their own costs.

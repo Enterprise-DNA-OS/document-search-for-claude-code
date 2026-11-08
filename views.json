@@ -1,13 +1,43 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Document Search for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Document search: this week",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Collection coverage",
+        "sql": "select * from collection_coverage order by code"
+      },
+      {
+        "title": "Overdue actions",
+        "sql": "select a.code,a.title,a.owner,a.due_on,d.external_id as document from overdue_actions a left join documents d on d.id=a.document_id order by a.due_on,a.code"
+      }
+    ]
+  },
+  {
+    "name": "review-queue",
+    "title": "Content and retention reviews",
+    "sections": [
+      {
+        "title": "Content reviews",
+        "sql": "select external_id,title,owner,status,review_on from review_queue order by external_id"
+      },
+      {
+        "title": "Retention reviews",
+        "sql": "select external_id,title,owner,retention_review_on from retention_queue order by external_id"
+      }
+    ]
+  },
+  {
+    "name": "search-gaps",
+    "title": "Search gaps and controls",
+    "sections": [
+      {
+        "title": "Unanswered questions",
+        "sql": "select query,audience,count(*)::int as attempts from query_log where result_count=0 group by query,audience order by attempts desc"
+      },
+      {
+        "title": "Control findings",
+        "sql": "select * from compliance_findings order by rule,record"
       }
     ]
   }

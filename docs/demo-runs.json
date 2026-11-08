@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Find an approved source",
+    "ask": "Which current source explains supplier onboarding?",
+    "command": "npm run search -- search --query=supplier --group=staff",
+    "output": "  citation  title                collection  source url                                 review on   relevance  excerpt                                                                      content hash                              \n  --------  -------------------  ----------  -----------------------------------------  ----------  ---------  ---------------------------------------------------------------------------  ------------------------------------------\n  OPS-001   Supplier onboarding  DEMO-OPS    https://example.invalid/documents/ops-001  2026-12-08  0.6687     Before onboarding a supplier, confirm the business owner, payment terms ...  5b2460dd65f39f606a603b4bd7c23864d274d2f..."
+  },
+  {
+    "title": "Review the content",
+    "ask": "Which documents need an owner review?",
+    "command": "npm run search -- review-due",
+    "output": "  external id  title                     owner        status    review on \n  -----------  ------------------------  -----------  --------  ----------\n  LEGACY-001   Old purchasing guide                   draft     2026-10-09\n  OPS-003      Remote working policy     Jamie Patel  approved  2026-10-30\n  OPS-005      Supplier onboarding copy  Morgan Lee   draft     2026-11-06"
+  },
+  {
+    "title": "Check coverage",
+    "ask": "Which collections have documents held back?",
+    "command": "npm run search -- coverage",
+    "output": "  code         name                 owner       audience   access review on  documents  searchable  held\n  -----------  -------------------  ----------  ---------  ----------------  ---------  ----------  ----\n  DEMO-BOARD   Board papers         Alex Chen   directors  2026-12-08        1          1           0   \n  DEMO-LEGACY  Legacy intranet                  staff      2026-10-29        1          0           1   \n  DEMO-OPS     Operations handbook  Morgan Lee  staff      2027-01-07        5          2           3"
+  }
+]

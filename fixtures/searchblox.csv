@@ -1,0 +1,4 @@
+id,title,content,url,owner,personal_data,department
+IMPORT-001,Travel approval,"Before booking travel, ask your manager for approval.",https://example.invalid/travel,Morgan Lee,false,Operations
+IMPORT-002,Incident contacts,"Call the duty manager.
+Record the incident reference.",https://example.invalid/incident,Morgan Lee,true,Operations
